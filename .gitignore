@@ -5,7 +5,7 @@
 # Generated render/check artifacts
 work/pdf_render/
 
-# External image asset folder is not needed because images are embedded as base64
+# External image asset folders are not needed because images are embedded as base64
 outputs/
 
 # Local deployment/tooling state

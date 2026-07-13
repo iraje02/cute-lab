@@ -1,4 +1,4 @@
-const MICROMIXER_SITE = "./micromixer";
+const MICROMIXER_SITE = "https://cute-lab.vercel.app";
 
 window.CUTE_LAB_CONTENT = {
   navigation: {
@@ -16,10 +16,7 @@ window.CUTE_LAB_CONTENT = {
         "Developing electric-vehicle systems through hardware testing, design iteration, and performance-driven engineering analysis.",
       buttonText: "Explore EV Team",
       sections: [
-        { label: "The Team", href: "#ev-team" },
-        { label: "Device Design", href: "#ev-design" },
-        { label: "Computational Modeling", href: "#ev-modeling" },
-        { label: "Physical Testing", href: "#ev-testing" },
+        { label: "Meet the Team", href: "#ev-team" },
       ],
     },
     // EV TEAM STUDENTS EDIT ABOVE THIS LINE
@@ -54,10 +51,7 @@ window.CUTE_LAB_CONTENT = {
         "Exploring bioprinting workflows that connect material preparation, controlled deposition, and testing for future tissue-engineering applications.",
       buttonText: "Explore Bioprinter Team",
       sections: [
-        { label: "The Team", href: "#bioprinter-team" },
-        { label: "Device Design", href: "#bioprinter-design" },
-        { label: "Computational Modeling", href: "#bioprinter-modeling" },
-        { label: "Physical Testing", href: "#bioprinter-testing" },
+        { label: "Meet the Team", href: "#bioprinter-team" },
       ],
     },
     // BIOPRINTER TEAM STUDENTS EDIT ABOVE THIS LINE

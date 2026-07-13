@@ -333,6 +333,15 @@ h3 {
   font-weight: 520;
 }
 
+.hero-subheading {
+  max-width: 780px;
+  margin-bottom: 1.1rem;
+  color: var(--deep-blue);
+  font-size: clamp(1.35rem, 2.6vw, 2.35rem);
+  font-weight: 850;
+  line-height: 1.18;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
