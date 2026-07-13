@@ -1,4 +1,4 @@
-const MICROMIXER_SITE = "https://cute-lab.vercel.app";
+const MICROMIXER_SITE = "./micromixer";
 
 window.CUTE_LAB_CONTENT = {
   navigation: {
