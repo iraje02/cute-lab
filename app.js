@@ -34,6 +34,12 @@
       item.append(link, menu);
       navList.append(item);
     });
+
+    const posterItem = document.createElement("li");
+    const posterLink = createElement("a", "nav-link", "Poster");
+    posterLink.href = "#poster";
+    posterItem.append(posterLink);
+    navList.append(posterItem);
   }
 
   function renderTeamCards() {
