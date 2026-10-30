@@ -1346,6 +1346,71 @@
       font-size: 12px;
     }
 
+    .poster-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(15, 46, 70, 0.14);
+    }
+
+    .poster-tab {
+      appearance: none;
+      border: 1px solid transparent;
+      border-bottom: 0;
+      border-radius: 8px 8px 0 0;
+      padding: 0.7rem 1.2rem;
+      background: transparent;
+      color: var(--muted-ink);
+      font: 700 0.95rem var(--font-body);
+      cursor: pointer;
+    }
+
+    .poster-tab:hover {
+      color: var(--riviera-blue);
+    }
+
+    .poster-tab[aria-selected="true"] {
+      border-color: rgba(65, 141, 222, 0.22);
+      background: var(--white);
+      color: var(--deep-blue);
+      box-shadow: 0 -2px 0 var(--terracotta) inset;
+    }
+
+    .poster-tab:focus-visible {
+      outline: 2px solid var(--riviera-blue-bright);
+      outline-offset: 2px;
+    }
+
+    .poster-panel[hidden] {
+      display: none;
+    }
+
+    .poster-figure {
+      margin: 0;
+    }
+
+    .poster-link {
+      display: block;
+      border: 1px solid rgba(65, 141, 222, 0.22);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .poster-link img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .poster-figure figcaption {
+      margin-top: 0.85rem;
+      color: var(--muted-ink);
+      font-size: 0.92rem;
+    }
+
     @media (max-width: 980px) {
       .hero-grid,
       .section-heading,
@@ -1495,6 +1560,7 @@
             <li><a class="dropdown-link" href="#design">Device Design</a></li>
             <li><a class="dropdown-link" href="#modeling">Computational Modeling</a></li>
             <li><a class="dropdown-link" href="#testing">Physical Testing</a></li>
+            <li><a class="dropdown-link" href="#posters">Research Posters</a></li>
           </ul>
         </li>
         <li class="nav-item has-dropdown">
@@ -1891,6 +1957,32 @@
         </div>
       </div>
     </section>
+
+    <section class="section" id="posters" aria-labelledby="posters-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Research Posters</p>
+            <h2 id="posters-title">Posters from the Micromixer Team</h2>
+          </div>
+          <p class="lead">Poster presentations of the team's TLCCM work, organized by term. Select an image to open it at full size.</p>
+        </div>
+
+        <!-- To add a new term later: copy one button and one panel, give them new ids, and point aria-controls / aria-labelledby at them. -->
+        <div class="poster-tabs" role="tablist" aria-label="Research poster terms">
+          <button class="poster-tab" type="button" role="tab" id="tab-summer-2026" aria-selected="true" aria-controls="panel-summer-2026">Summer 2026</button>
+        </div>
+
+        <div class="poster-panel" role="tabpanel" id="panel-summer-2026" aria-labelledby="tab-summer-2026" tabindex="0">
+          <figure class="poster-figure">
+            <a class="poster-link" href="images/summer-2026-poster.jpg" target="_blank" rel="noopener">
+              <img src="images/summer-2026-poster.jpg" width="1024" height="768" loading="lazy" alt="Summer 2026 research poster: Computational Analysis of Multistage Mixing and Rapid Prototyping of the Two-Layer Crossing-Channel Micromixer (TLCCM) for Bioprinting Applications, by Karis Park, Ishita Raje, Alejandro Tellez, and Steven Santana.">
+            </a>
+            <figcaption>Computational Analysis of Multistage Mixing and Rapid Prototyping of the Two-Layer Crossing-Channel Micromixer (TLCCM) for Bioprinting Applications. Karis Park, Ishita Raje, Alejandro Tellez, Steven Santana, CuTE Lab, Summer 2026.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer-note" aria-label="References">
@@ -2085,6 +2177,27 @@
     }, { rootMargin: "-35% 0px -55% 0px", threshold: 0 });
 
     sections.forEach((section) => activeObserver.observe(section));
+
+    const posterTabs = Array.from(document.querySelectorAll(".poster-tab"));
+    function selectPosterTab(tab) {
+      posterTabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+    }
+    posterTabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => selectPosterTab(tab));
+      tab.addEventListener("keydown", (event) => {
+        const step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+        if (!step) return;
+        const next = posterTabs[(i + step + posterTabs.length) % posterTabs.length];
+        selectPosterTab(next);
+        next.focus();
+      });
+    });
+    if (posterTabs.length) selectPosterTab(posterTabs[0]);
 
     modelPath.setAttribute("d", buildDataPath());
     empiricalPath.setAttribute("d", `M0 ${yForPercent(99).toFixed(2)} L${chart.width} ${yForPercent(99).toFixed(2)}`);
